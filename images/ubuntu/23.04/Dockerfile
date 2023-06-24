@@ -1,0 +1,18 @@
+FROM ubuntu:23.04
+
+ENV NAME=ubuntu-toolbox VERSION=23.04
+LABEL com.github.containers.toolbox="true"
+
+COPY README.md /
+
+COPY missing-docs /
+RUN apt-get update -qy && xargs -a missing-docs apt-get -qy install
+RUN rm /missing-docs
+
+COPY extra-packages /
+RUN apt-get update -qy && xargs -a extra-packages apt-get -qy install
+RUN rm /extra-packages
+
+COPY nsswitch.conf /etc/nsswitch.conf
+
+RUN apt-get -y clean
