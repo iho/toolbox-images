@@ -1,4 +1,5 @@
 bash-completion
+apt-utils
 bc
 bzip2
 diffutils
